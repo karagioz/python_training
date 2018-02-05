@@ -7,7 +7,30 @@ class ContactHelper:
         wd = self.app.wd
         # init contact creation
         wd.find_element_by_link_text("add new").click()
-        # fill contact form
+        self.fill_contact_form(contact)
+        # submit contact creation
+        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+
+    def edit_first_contact(self, contact):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # switch to edit mode
+        wd.find_element_by_xpath("//img[@title='Edit']").click()
+        self.fill_contact_form(contact)
+        # submit updates
+        wd.find_element_by_xpath("//input[@value='Update']").click()
+
+    def fill_contact_form(self, contact):
+        wd = self.app.wd
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
@@ -53,17 +76,21 @@ class ContactHelper:
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option["+contact.option1+"]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option["+contact.option1+"]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option["+contact.option2+"]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option["+contact.option2+"]").click()
+        if not wd.find_element_by_xpath(
+                "//div[@id='content']/form/select[1]//option[" + contact.option1 + "]").is_selected():
+            wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[" + contact.option1 + "]").click()
+        if not wd.find_element_by_xpath(
+                "//div[@id='content']/form/select[2]//option[" + contact.option2 + "]").is_selected():
+            wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[" + contact.option2 + "]").click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(contact.byear)
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option["+contact.option3+"]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option["+contact.option3+"]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option["+contact.option4+"]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option["+contact.option4+"]").click()
+        if not wd.find_element_by_xpath(
+                "//div[@id='content']/form/select[3]//option[" + contact.option3 + "]").is_selected():
+            wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[" + contact.option3 + "]").click()
+        if not wd.find_element_by_xpath(
+                "//div[@id='content']/form/select[4]//option[" + contact.option4 + "]").is_selected():
+            wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[" + contact.option4 + "]").click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.ayear)
@@ -76,13 +103,3 @@ class ContactHelper:
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
-        # submit contact creation
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-
-    def delete_first_contact(self):
-        wd = self.app.wd
-        # select first contact
-        wd.find_element_by_name("selected[]").click()
-        # submit deletion
-        wd.find_element_by_xpath("//input[@value='Delete']").click()
-        wd.switch_to_alert().accept()
