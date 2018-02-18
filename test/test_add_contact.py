@@ -10,8 +10,8 @@ def test_add_contact(app):
                                byear="1990", option3="5", option4="6", ayear="2000", address2="oooo", phone2="pppp",
                                notes="qqqq")
     app.contact.create(contact)
+    assert len(old_contacts) + 1 == app.contact.count()
     new_contacts = app.contact.get_contact_list()
-    assert len(old_contacts) + 1 == len(new_contacts)
     old_contacts.append(contact)
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
@@ -23,7 +23,7 @@ def test_add_empty_contact(app):
                                option1="1", option2="1", byear="", option3="1", option4="1", ayear="", address2="",
                                phone2="", notes="")
     app.contact.create(contact)
+    assert len(old_contacts) + 1 == app.contact.count()
     new_contacts = app.contact.get_contact_list()
-    assert len(old_contacts) + 1 == len(new_contacts)
     old_contacts.append(contact)
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
