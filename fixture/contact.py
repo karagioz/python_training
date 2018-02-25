@@ -89,7 +89,7 @@ class ContactHelper:
     def change_select_option(self, select, option):
         wd = self.app.wd
         if option is not None:
-            select_xpath = "//div[@id='content']/form/select[" + str(select) + "]//option[" + option + "]"
+            select_xpath = "//div[@id='content']/form/select[" + str(select) + "]//option[" + str(option) + "]"
             if not wd.find_element_by_xpath(select_xpath).is_selected():
                 wd.find_element_by_xpath(select_xpath).click()
 
