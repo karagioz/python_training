@@ -102,20 +102,20 @@ class ContactHelper:
         self.change_field_value("email2", contact.email2)
         self.change_field_value("email3", contact.email3)
         self.change_field_value("homepage", contact.homepage)
-        self.change_select_option(1, contact.option1)
-        self.change_select_option(2, contact.option2)
+        self.change_select_option("bday", contact.option1)
+        self.change_select_option("bmonth", contact.option2)
         self.change_field_value("byear", contact.byear)
-        self.change_select_option(3, contact.option3)
-        self.change_select_option(4, contact.option4)
+        self.change_select_option("aday", contact.option3)
+        self.change_select_option("amonth", contact.option4)
         self.change_field_value("ayear", contact.ayear)
         self.change_field_value("address2", contact.address2)
         self.change_field_value("phone2", contact.secondaryphone)
         self.change_field_value("notes", contact.notes)
 
-    def change_select_option(self, select, option):
+    def change_select_option(self, select_name, option):
         wd = self.app.wd
         if option is not None:
-            select_xpath = "//div[@id='content']/form/select[" + str(select) + "]//option[" + str(option) + "]"
+            select_xpath = "//select[@name='" + select_name + "']//option[@value='" + str(option) + "']"
             if not wd.find_element_by_xpath(select_xpath).is_selected():
                 wd.find_element_by_xpath(select_xpath).click()
 
@@ -179,3 +179,15 @@ class ContactHelper:
         workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondaryphone=secondaryphone)
+
+    def add_contact_to_group(self, contact, group):
+        self.app.open_home_page()
+        self.app.contact.select_contact_by_id(contact.id)
+        self.app.contact.change_select_option("to_group", str(group.id))
+        self.app.wd.find_element_by_name("add").click()
+
+    def remove_contact_from_group(self, contact, group):
+        self.app.open_home_page()
+        self.app.contact.change_select_option("group", str(group.id))
+        self.app.contact.select_contact_by_id(contact.id)
+        self.app.wd.find_element_by_name("remove").click()
