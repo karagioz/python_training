@@ -12,7 +12,7 @@ def test_edit_some_contact(app, db, check_ui):
                       company="new_company", address="new_address", fax="new_fax",
                       mobilephone="new_mobile", workphone="new_work", homephone="new_home", email="new_email",
                       email2="new_email2", email3="new_email3", homepage="new_homepage",
-                      option1="4", option2="5", byear="1991", option3="6", option4="7",
+                      option1="4", option2="May", byear="1991", option3="6", option4="october",
                       ayear="2001", address2="new_address2", secondaryphone="new_phone2",
                       notes="new_notes")
     app.contact.edit_contact_by_id(old_contact.id, new_contact)
