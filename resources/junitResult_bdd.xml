@@ -1,0 +1,38 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<result plugin="junit@1.24">
+  <suites>
+    <suite>
+      <file>C:\Users\Daria\.jenkins\workspace\addressbook bdd tests\results.xml</file>
+      <name>pytest</name>
+      <duration>31.972</duration>
+      <time>31.972</time>
+      <enclosingBlocks/>
+      <enclosingBlockNames/>
+      <cases>
+        <case>
+          <duration>28.337769</duration>
+          <className>bdd.group_scenarios</className>
+          <testName>test_add_new_group[name1-header1-footer1]</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>1.468365</duration>
+          <className>bdd.group_scenarios</className>
+          <testName>test_add_new_group[name2-header2-footer2]</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>1.8824642</duration>
+          <className>bdd.group_scenarios</className>
+          <testName>test_delete_group</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>31.972</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>
